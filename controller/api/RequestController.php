@@ -4,7 +4,7 @@ class RequestController extends BaseController
     /** 
     * Get all products from Printful catalogV2 by product ID 
     */
-    public function listProdoct()
+    public function listProduct()
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];

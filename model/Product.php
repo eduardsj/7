@@ -9,9 +9,14 @@ class Product extends PrintFulApi
      */
     public function getPropertiesForProduct($productId = '')
     {
-       $requestUrl = $this->createUrl($productId);
-       $response = $this->executeRequestToPrintFullApi($requestUrl, 'GET');
-       return [$this -> getPropertyValues($response, 'color'), $this -> getPropertyValues($response, 'size')];
+        if ($this->get($productId))
+        {
+            return $this->get($productId);
+        }
+
+        $requestUrl = $this->createUrl($productId);
+        $response = $this->executeRequestToPrintFullApi($requestUrl, 'GET');
+        return [$this -> getPropertyValues($response, 'color'), $this -> getPropertyValues($response, 'size')];
     }
 
     /**
@@ -20,7 +25,7 @@ class Product extends PrintFulApi
      *  @return array 
      */
     private function getPropertyValues ($jsonString = '', $propertyToSelect = 'id')
-    {
+    {   
         $propertyValues = [];
         $responseObj = json_decode($jsonString);
         $dataContainerObj = $responseObj->data;
